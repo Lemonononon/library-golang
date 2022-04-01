@@ -6,5 +6,5 @@
   MaxIdleConns: 100 # 空闲连接池的连接数量最大值，不设置`database/sql`默认为2，MaxOpenConns总是不少于MaxIdleConns
   Collation: "utf8mb4_general_ci" # 与数据库交互时使用的字符集，最好不要用`charset`，因为它会触发额外的查询。
   Endpoint: "112.124.21.188"
-  Username: ""
-  Password: "APQM7E28DC)>Mf!x1FxUd30D:*TK-~P.kR5^3CMw:_Ep7Xp@X?Xu6qR7-.7Qyhx3"
+  Username: "lemonon"
+  Password: ""
