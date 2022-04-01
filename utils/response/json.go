@@ -1,6 +1,6 @@
 package response
 
-import "aitour/define"
+import "library/define"
 
 // JSONData 用于正常情况 参数为body 如果没有body可以填nil
 func JSONData(data interface{}) Response {
