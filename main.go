@@ -3,12 +3,13 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	"library/db"
 	"log"
 )
 
 func main() {
 	r := gin.Default()
-	//db.InitCaller()
+	db.InitCaller()
 	register(r) // init route
 	logrus.WithField("port", "5000").Error("server start")
 
