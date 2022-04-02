@@ -16,29 +16,31 @@ type Conf struct {
 	MaxIdleConns int    `yaml:"MaxIdleConns"`
 	MaxOpenConns int    `yaml:"MaxOpenConns"`
 	Collation    string `yaml:"Collation"`
-	Endpoint     string `yaml:"Endpoint"`
+	Host         string `yaml:"Host"`
 	Username     string `yaml:"Username"`
 	Password     string `yaml:"Password"`
 }
 
-func readConfig(configName string) (Conf, error) {
-	conf := Conf{}
+func readConfig(configName string) (map[string]Conf, error) {
+	confMap := make(map[string]Conf)
+
 	confFilePath := "./config/" + configName + ".yaml"
-	err := yamlparse.LoadYamlFile(confFilePath, &conf)
+	err := yamlparse.LoadYamlFile(confFilePath, &confMap)
 	if err != nil {
-		return Conf{}, err
+		return nil, err
 	}
-	return conf, nil
+	return confMap, nil
 }
 func initMySQL() {
-	conf, err := readConfig("rdb")
+	confMap, err := readConfig("rdb")
+	conf, _ := confMap["mysql"]
 	if err != nil {
 		panic(err)
 	}
 	dsn := fmt.Sprintf(`%s:%s@tcp(%s)/%s?collation=%s&parseTime=True&loc=Local&timeout=%s&readTimeout=%s&writeTimeout=%s`,
 		conf.Username,
 		conf.Password,
-		conf.Endpoint,
+		conf.Host,
 		conf.DBName,
 		conf.Collation,
 		conf.Timeout,

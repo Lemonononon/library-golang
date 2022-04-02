@@ -16,5 +16,6 @@ func LoadYamlFile(fileName string, res interface{}) error {
 		log.Fatal(fmt.Sprintf("yaml parse error, file name: %v", fileName))
 		return err
 	}
+	fmt.Println(res)
 	return err
 }

@@ -4,13 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"library/db"
+	"library/router"
 	"log"
 )
 
 func main() {
 	r := gin.Default()
 	db.InitCaller()
-	register(r) // init route
+	router.Register(r) // init route
 	logrus.WithField("port", "5000").Error("server start")
 
 	// listen to 0.0.0.0:5000
