@@ -2,6 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"library/handler/handler_book"
+	"library/handler/handler_record"
 	"library/handler/ping"
 	"library/mw"
 )
@@ -14,4 +16,16 @@ func Register(r *gin.Engine) {
 		mw.ResponseMiddleware, // response middleware
 	)
 	api.GET("/ping", ping.Pong) // ping
+	book := api.Group("/book")
+	{
+		book.GET("/get_book", handler_book.GetBook)
+		book.POST("/create_book", handler_book.CreateBook)
+	}
+
+	record := api.Group("/record")
+	{
+		record.POST("/borrow_book", handler_record.Borrow)
+		record.POST("/return_book", handler_record.Return)
+	}
+
 }

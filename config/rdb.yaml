@@ -1,0 +1,11 @@
+mysql:
+  DBName: "library_golang"
+  Timeout: "1s" # 建立连接的超时界限，即dial timeout
+  ReadTimeout: "1s"
+  WriteTimeout: "1s"
+  MaxOpenConns: 500 # 打开的连接数最大值，不设置`database/sql`默认为0即不限制
+  MaxIdleConns: 100 # 空闲连接池的连接数量最大值，不设置`database/sql`默认为2，MaxOpenConns总是不少于MaxIdleConns
+  Collation: "utf8mb4_general_ci" # 与数据库交互时使用的字符集，最好不要用`charset`，因为它会触发额外的查询。
+  Host: "127.0.0.1:3306"
+  Username: "library"
+  Password: "library_golang"
