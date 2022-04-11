@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"library/handler/handler_auth"
 	"library/handler/handler_book"
 	"library/handler/handler_record"
 	"library/handler/ping"
