@@ -1,4 +1,4 @@
-package model
+package model_book
 
 type Book struct {
 	BookID   int     `gorm:"column:book_id;primaryKey"`

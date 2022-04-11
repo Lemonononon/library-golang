@@ -1,4 +1,4 @@
-package model
+package model_card
 
 type Card struct {
 	CardID     int    `gorm:"column:card_id;primaryKey"`

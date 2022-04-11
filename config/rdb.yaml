@@ -1,4 +1,4 @@
-mysql:
+Library:
   DBName: "library_golang"
   Timeout: "1s" # 建立连接的超时界限，即dial timeout
   ReadTimeout: "1s"

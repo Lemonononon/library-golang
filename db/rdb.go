@@ -33,7 +33,7 @@ func readConfig(configName string) (map[string]Conf, error) {
 }
 func initMySQL() {
 	confMap, err := readConfig("rdb")
-	conf, _ := confMap["mysql"]
+	conf, _ := confMap["Library"]
 	if err != nil {
 		panic(err)
 	}

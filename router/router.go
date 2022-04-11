@@ -16,6 +16,11 @@ func Register(r *gin.Engine) {
 		mw.ResponseMiddleware, // response middleware
 	)
 	api.GET("/ping", ping.Pong) // ping
+
+	api.POST("/login", handler_auth.Login) // 登录
+	api.POST("/join", handler_auth.Join)   // 注册
+	api.Use(mw.AuthenticationMiddleware)   // 开启身份验证
+
 	book := api.Group("/book")
 	{
 		book.GET("/get_book", handler_book.GetBook)

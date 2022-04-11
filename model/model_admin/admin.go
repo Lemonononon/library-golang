@@ -1,4 +1,4 @@
-package model
+package model_admin
 
 type Admin struct {
 	AdminID   int    `gorm:"column:administrator_id;primaryKey"`
