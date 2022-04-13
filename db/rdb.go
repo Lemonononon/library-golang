@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"library/model/model_admin"
+	"library/model/model_book"
+	"library/model/model_card"
+	"library/model/model_record"
 	"library/utils/yamlparse"
 	"log"
 )
@@ -50,4 +54,9 @@ func initMySQL() {
 	if err != nil {
 		log.Fatal("db init failed")
 	}
+	MySQL.AutoMigrate(&model_admin.Admin{})
+	MySQL.AutoMigrate(&model_book.Book{})
+	MySQL.AutoMigrate(&model_card.Card{})
+	MySQL.AutoMigrate(&model_record.Record{})
+
 }

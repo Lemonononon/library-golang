@@ -2,8 +2,10 @@ package ping
 
 import (
 	"github.com/gin-gonic/gin"
+	"library/define"
+	"library/utils/response"
 )
 
 func Pong(c *gin.Context) {
-	c.JSON(200, gin.H{"st": 0, "msg": "pong!"})
+	c.Set(define.LibraryResponse, response.JSONData("pong!"))
 }
