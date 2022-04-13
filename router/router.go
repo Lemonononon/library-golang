@@ -21,13 +21,13 @@ func Register(r *gin.Engine) {
 
 	api.POST("/login", handler_auth.Login) // 登录
 	api.POST("/join", handler_auth.Join)   // 注册
-	api.Use(mw.AuthenticationMiddleware)   // 开启身份验证
+	//api.Use(mw.AuthenticationMiddleware)   // 开启身份验证
 
 	book := api.Group("/book")
 	{
-		book.POST("/add", handler_book.AddBook)        // 添加一本书
-		book.POST("/add_books", handler_book.AddBooks) // 批量添加书籍
-		book.POST("/query", handler_book.QueryBooks)   // 查询书籍
+		book.POST("/add", handler_book.AddBook)      // 添加一本书
+		book.POST("/adds", handler_book.AddBooks)    // 批量添加书籍
+		book.POST("/query", handler_book.QueryBooks) // 查询书籍
 	}
 	card := api.Group("/card")
 	{
@@ -36,6 +36,7 @@ func Register(r *gin.Engine) {
 	}
 	record := api.Group("/record")
 	{
+		record.GET("/query/:card_id", handler_record.QueryRecord)
 		record.POST("/borrow_book", handler_record.Borrow)
 		record.POST("/return_book", handler_record.Return)
 	}

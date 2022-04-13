@@ -11,14 +11,23 @@ func Borrow(c *gin.Context) {
 	cardID := c.Param("card_id")
 	card := int(numberu.ToInt64(cardID))
 	bookID := c.Param("book_id")
-	book := int(numberu.ToInt64(bookID))
-	c.Set(define.LibraryResponse, service_record.BorrowBook(c, card, book))
+	c.Set(define.LibraryResponse, service_record.Borrow(c, card, bookID))
 }
 
 func Return(c *gin.Context) {
 	cardID := c.Param("card_id")
 	card := int(numberu.ToInt64(cardID))
 	bookID := c.Param("book_id")
-	book := int(numberu.ToInt64(bookID))
-	c.Set(define.LibraryResponse, service_record.ReturnBook(c, card, book))
+	c.Set(define.LibraryResponse, service_record.Return(c, card, bookID))
+}
+
+func QueryRecord(c *gin.Context) {
+	cardID := c.Param("card_id")
+	card := int(numberu.ToInt64(cardID))
+	if card <= 0 {
+		c.Set(define.LibraryResponse, define.StParamErr)
+		return
+	}
+
+	c.Set(define.LibraryResponse, service_record.QueryRecord(c, card))
 }

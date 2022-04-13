@@ -3,6 +3,7 @@ package handler_book
 import (
 	"github.com/gin-gonic/gin"
 	"library/define"
+	"library/model/model_book"
 	"library/service/service_book"
 )
 
@@ -22,8 +23,21 @@ func QueryBooks(c *gin.Context) {
 }
 
 func AddBook(c *gin.Context) {
+	var req model_book.AddBookReq
+	if err := c.ShouldBind(&req); err != nil {
+		c.Set(define.LibraryResponse, define.StParamErr)
+		return
+	}
 
+	c.Set(define.LibraryResponse, service_book.AddBook(c, req))
 }
-func AddBooks(c *gin.Context) {
 
+//AddBooks book_no_1, Computer Science, Computer Architecture, xxx, 2004, xxx, 90.00, 2
+func AddBooks(c *gin.Context) {
+	var req model_book.AddBooksReq
+	if err := c.ShouldBind(&req); err != nil {
+		c.Set(define.LibraryResponse, define.StParamErr)
+		return
+	}
+	c.Set(define.LibraryResponse, service_book.AddBooks(c, req))
 }
