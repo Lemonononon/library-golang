@@ -37,7 +37,7 @@ func Register(r *gin.Engine) {
 	record := api.Group("/record")
 	{
 		record.GET("/query/:card_id", handler_record.QueryRecord)
-		record.POST("/borrow_book", handler_record.Borrow)
-		record.POST("/return_book", handler_record.Return)
+		record.GET("/borrow/:card_id/:book_id", handler_record.Borrow)
+		record.GET("/return", handler_record.Return)
 	}
 }

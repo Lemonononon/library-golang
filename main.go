@@ -15,6 +15,7 @@ func main() {
 	auth.InitAuth()     //init auth
 	crypto.InitCrypto() // init crypto
 	router.Register(r)  // init route
+	//fmt.Println(timeu.FormatDate(time.Now()))
 	// listen to 0.0.0.0:5000
 	log.Fatal(r.Run(":5000"))
 }

@@ -6,11 +6,16 @@ import (
 	"library/define"
 	"library/model/model_record"
 	"library/utils/response"
+	"library/utils/timeu"
+	"time"
 )
 
 func Borrow(c *gin.Context, cardID int, bookID string) response.Response {
-	var record model_record.Record
-
+	record := model_record.Record{
+		CardID:     cardID,
+		BookID:     bookID,
+		BorrowDate: timeu.FormatDate(time.Now()),
+	}
 	if err := db.MySQL.Create(&record).Error; err != nil {
 		return response.JSONSt(define.StDBErr)
 	}
