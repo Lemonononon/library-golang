@@ -54,6 +54,7 @@ func initMySQL() {
 	if err != nil {
 		log.Fatal("db init failed")
 	}
+	MySQL.Debug()
 	MySQL.AutoMigrate(&model_admin.Admin{})
 	MySQL.AutoMigrate(&model_book.Book{})
 	MySQL.AutoMigrate(&model_card.Card{})

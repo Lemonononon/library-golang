@@ -14,6 +14,7 @@ const (
 	StDuplicateJoinErr St = 10005 // 账户已注册
 	StNoUser           St = 10006 // 账户不存在
 	StTokenExpired     St = 10007 // token过期
+	StNoCard           St = 10008 // 没有Card
 	StRPCErr           St = 20001 // RPC失败
 	StServerErr        St = 20002 // 服务器错误
 

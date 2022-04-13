@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"library/handler/handler_auth"
 	"library/handler/handler_book"
+	"library/handler/handler_card"
 	"library/handler/handler_record"
 	"library/handler/ping"
 	"library/mw"
@@ -24,14 +25,18 @@ func Register(r *gin.Engine) {
 
 	book := api.Group("/book")
 	{
-		book.GET("/get_book", handler_book.GetBook)
-		book.POST("/create_book", handler_book.CreateBook)
+		book.POST("/add", handler_book.AddBook)        // 添加一本书
+		book.POST("/add_books", handler_book.AddBooks) // 批量添加书籍
+		book.POST("/query", handler_book.QueryBooks)   // 查询书籍
 	}
-
+	card := api.Group("/card")
+	{
+		card.POST("/add", handler_card.AddCard)
+		card.DELETE("/delete/:card_id", handler_card.DeleteCard)
+	}
 	record := api.Group("/record")
 	{
 		record.POST("/borrow_book", handler_record.Borrow)
 		record.POST("/return_book", handler_record.Return)
 	}
-
 }

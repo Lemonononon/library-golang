@@ -16,9 +16,9 @@ const PhoneRegex = "^1(3\\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\\d|9[0-35-9])\\d{8
 //const EmailRegex = "^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$"
 
 // QueryAdminByAdminID 查询管理员,根据管理员ID查询管理员信息，仅供内部使用，不作为api暴露
-func QueryAdminByAdminID(AdminID int) model_admin.Admin {
+func QueryAdminByPhone(phone string) model_admin.Admin {
 	var admin model_admin.Admin
-	if err := db.MySQL.First(&admin, AdminID).Error; err != nil {
+	if err := db.MySQL.First(&admin, "phone = ?", phone).Error; err != nil {
 		return model_admin.Admin{AdminID: -1}
 	}
 	return admin

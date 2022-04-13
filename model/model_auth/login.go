@@ -1,7 +1,7 @@
 package model_auth
 
 type LoginReq struct {
-	AdminID  int    `json:"admin_id" binding:"required"`
+	Phone    string `json:"phone" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 type LoginResp struct {
