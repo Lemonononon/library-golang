@@ -26,8 +26,10 @@ func AddCard(c *gin.Context, req model_card.AddCardReq) response.Response {
 
 func DeleteCard(c *gin.Context, cardID int) response.Response {
 	var card model_card.Card
-	if err := db.MySQL.Delete(&card, "id = ?", cardID).Error; err != nil {
+	if err := db.MySQL.Delete(&card, "card_id = ?", cardID).Error; err != nil {
 		return response.JSONSt(define.StDBErr)
 	}
-	return response.JSONData(nil)
+	return response.JSONData(model_card.DeleteCardReq{
+		Done: "Succeed!",
+	})
 }

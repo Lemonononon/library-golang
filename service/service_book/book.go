@@ -9,6 +9,15 @@ import (
 )
 
 func QueryBooks(c *gin.Context, req model_book.QueryBookReq) response.Response {
+	tx := db.MySQL.Begin()
+	lowerYear, upperYear := req.LowerYear, req.UpperYear
+	if lowerYear != 0 && upperYear != 0 {
+		tx = tx.Where("year >= ? and year <= ?", lowerYear, upperYear)
+	}
+	lowerPrice, upperPrice := req.LowerPrice, req.UpperPrice
+	if lowerPrice != 0 || upperPrice != 0 {
+		tx = tx.Where("price >= ?", lowerPrice).Where("price <= ?", upperPrice)
+	}
 
 	book := &model_book.Book{
 		BookName: req.BookName,
@@ -19,7 +28,7 @@ func QueryBooks(c *gin.Context, req model_book.QueryBookReq) response.Response {
 	var books []model_book.Book
 	//var books []model_book.Book
 	//if req.LowerPrice != {}
-	if err := db.MySQL.Debug().Where(&book).Find(&books).Error; err != nil {
+	if err := tx.Debug().Order(req.Order).Where(&book).Find(&books).Error; err != nil {
 		return response.JSONSt(define.StDBErr)
 	}
 	return response.JSONData(&model_book.QueryBookResp{Books: books})

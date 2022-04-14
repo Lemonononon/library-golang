@@ -16,9 +16,10 @@ type QueryBookReq struct {
 	BookName   string  `json:"book_name"`
 	Category   string  `json:"category"`
 	Press      string  `json:"press"`
+	Author     string  `json:"author"`
+	Order      string  `json:"order"`
 	LowerYear  int     `json:"lower_year"`
 	UpperYear  int     `json:"upper_year"`
-	Author     string  `json:"author"`
 	LowerPrice float32 `json:"lower_price"`
 	UpperPrice float32 `json:"upper_price"`
 }

@@ -18,3 +18,7 @@ type AddCardReq struct {
 type AddCardResp struct {
 	CardID int `json:"card_id"`
 }
+
+type DeleteCardReq struct {
+	Done string `json:"done"`
+}

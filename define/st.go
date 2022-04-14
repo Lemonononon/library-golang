@@ -14,7 +14,9 @@ const (
 	StDuplicateJoinErr St = 10005 // 账户已注册
 	StNoUser           St = 10006 // 账户不存在
 	StTokenExpired     St = 10007 // token过期
-	StNoCard           St = 10008 // 没有Card
+	StNoCard           St = 10008 // 账号不存在
+	StNoEnoughBook     St = 10009 // 库存不足
+	StNoBook           St = 10010 //书籍不存在
 	StRPCErr           St = 20001 // RPC失败
 	StServerErr        St = 20002 // 服务器错误
 
@@ -40,6 +42,12 @@ func (s St) String() string {
 		return "账户不存在"
 	case StTokenExpired:
 		return "token过期"
+	case StNoCard:
+		return "账号不存在"
+	case StNoEnoughBook:
+		return "库存不足"
+	case StNoBook:
+		return "书籍不存在"
 	case StRPCErr:
 		return "服务器远程调用失败"
 	case StServerErr:

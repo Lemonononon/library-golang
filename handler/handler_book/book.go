@@ -1,6 +1,7 @@
 package handler_book
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"library/define"
 	"library/model/model_book"
@@ -24,6 +25,7 @@ func QueryBooks(c *gin.Context) {
 		c.Set(define.LibraryResponse, define.StParamErr)
 		return
 	}
+	fmt.Println(req)
 	c.Set(define.LibraryResponse, service_book.QueryBooks(c, req))
 }
 

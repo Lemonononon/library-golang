@@ -22,7 +22,10 @@ func Login(c *gin.Context, req model_auth.LoginReq) response.Response {
 		if err != nil {
 			return response.JSONSt(define.StServerErr)
 		}
-		return response.JSONData(token)
+		res := model_auth.LoginResp{
+			Token: token,
+		}
+		return response.JSONData(res)
 	}
 
 	return response.JSONSt(define.StLoginErr)

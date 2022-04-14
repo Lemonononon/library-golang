@@ -37,5 +37,7 @@ func Join(c *gin.Context, req model_auth.JoinReq) response.Response {
 	//res := model_auth.JoinResp{
 	//	Token: token,
 	//}
-	return response.JSONData(token)
+	return response.JSONData(model_auth.JoinResp{
+		Token: token,
+	})
 }
