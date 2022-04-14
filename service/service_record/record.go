@@ -27,14 +27,21 @@ func Borrow(c *gin.Context, cardID int, bookID string) response.Response {
 }
 
 func Return(c *gin.Context, cardID int, bookID string) response.Response {
+	var record model_record.Record
+	if err := db.MySQL.Where("card_id = ? AND book_id = ?", cardID, bookID).First(&record).Error; err != nil {
+		return response.JSONSt(define.StDBErr)
+	}
 
-	return response.Response{}
+	if err := db.MySQL.Delete(&record).Error; err != nil {
+		return response.JSONSt(define.StDBErr)
+	}
+	return response.JSONData("Succeed!")
 }
 
 func QueryRecord(c *gin.Context, cardID int) response.Response {
 	var records model_record.RecordQueryResp
 
-	if err := db.MySQL.Where("card_id = ?", cardID).Find(&records).Error; err != nil {
+	if err := db.MySQL.Where("card_id = ?", cardID).Find(&records.Records).Error; err != nil {
 		return response.JSONSt(define.StDBErr)
 	}
 

@@ -28,6 +28,7 @@ func Register(r *gin.Engine) {
 		book.POST("/add", handler_book.AddBook)      // 添加一本书
 		book.POST("/adds", handler_book.AddBooks)    // 批量添加书籍
 		book.POST("/query", handler_book.QueryBooks) // 查询书籍
+		book.DELETE("/delete/:book_id", handler_book.DeleteBook)
 	}
 	card := api.Group("/card")
 	{
@@ -38,6 +39,6 @@ func Register(r *gin.Engine) {
 	{
 		record.GET("/query/:card_id", handler_record.QueryRecord)
 		record.GET("/borrow/:card_id/:book_id", handler_record.Borrow)
-		record.GET("/return", handler_record.Return)
+		record.GET("/return/:card_id/:book_id", handler_record.Return)
 	}
 }

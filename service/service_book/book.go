@@ -8,8 +8,21 @@ import (
 	"library/utils/response"
 )
 
-func QueryBooks(c *gin.Context) response.Response {
-	return response.Response{}
+func QueryBooks(c *gin.Context, req model_book.QueryBookReq) response.Response {
+
+	book := &model_book.Book{
+		BookName: req.BookName,
+		Category: req.Category,
+		Press:    req.Press,
+		Author:   req.Author,
+	}
+	var books []model_book.Book
+	//var books []model_book.Book
+	//if req.LowerPrice != {}
+	if err := db.MySQL.Debug().Where(&book).Find(&books).Error; err != nil {
+		return response.JSONSt(define.StDBErr)
+	}
+	return response.JSONData(&model_book.QueryBookResp{Books: books})
 }
 
 func AddBook(c *gin.Context, req model_book.AddBookReq) response.Response {
@@ -60,7 +73,16 @@ func AddBooks(c *gin.Context, req model_book.AddBooksReq) response.Response {
 	return response.JSONData(res)
 }
 
-func DeleteBook(c *gin.Context) response.Response {
-
-	return response.Response{}
+func DeleteBook(c *gin.Context, bookID string) response.Response {
+	var book model_book.Book
+	if err := db.MySQL.Where("book_id=?", bookID).First(&book).Error; err != nil {
+		return response.JSONSt(define.StDBErr)
+	}
+	if err := db.MySQL.Delete(&book).Error; err != nil {
+		return response.JSONSt(define.StDBErr)
+	}
+	res := model_book.DeleteBookResp{
+		Done: "Delete Succeed!",
+	}
+	return response.JSONData(res)
 }

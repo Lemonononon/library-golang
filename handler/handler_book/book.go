@@ -19,7 +19,12 @@ import (
 //}
 
 func QueryBooks(c *gin.Context) {
-	c.Set(define.LibraryResponse, service_book.QueryBooks(c))
+	var req model_book.QueryBookReq
+	if err := c.ShouldBind(&req); err != nil {
+		c.Set(define.LibraryResponse, define.StParamErr)
+		return
+	}
+	c.Set(define.LibraryResponse, service_book.QueryBooks(c, req))
 }
 
 func AddBook(c *gin.Context) {
@@ -40,4 +45,13 @@ func AddBooks(c *gin.Context) {
 		return
 	}
 	c.Set(define.LibraryResponse, service_book.AddBooks(c, req))
+}
+
+func DeleteBook(c *gin.Context) {
+	bookID := c.Param("book_id")
+	if len(bookID) == 0 {
+		c.Set(define.LibraryResponse, define.StParamErr)
+		return
+	}
+	c.Set(define.LibraryResponse, service_book.DeleteBook(c, bookID))
 }

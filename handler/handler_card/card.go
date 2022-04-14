@@ -5,6 +5,7 @@ import (
 	"library/define"
 	"library/model/model_card"
 	"library/service/service_card"
+	"library/utils/numberu"
 )
 
 func AddCard(c *gin.Context) {
@@ -17,8 +18,8 @@ func AddCard(c *gin.Context) {
 }
 
 func DeleteCard(c *gin.Context) {
-	tmpID, _ := c.Get("card_id")
-	cardID := tmpID.(int)
+	tmpID := c.Param("card_id")
+	cardID := int(numberu.ToInt64(tmpID))
 	if cardID <= 0 {
 		c.Set(define.LibraryResponse, define.StNoCard)
 		return

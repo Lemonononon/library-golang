@@ -13,14 +13,14 @@ type Book struct {
 }
 
 type QueryBookReq struct {
-	BookName   string `json:"book_name"`
-	Category   string `json:"category"`
-	Press      string `json:"press"`
-	LowerYear  int    `json:"lower_year"`
-	UpperYear  int    `json:"upper_year"`
-	Author     string `json:"author"`
-	LowerPrice int    `json:"lower_price"`
-	UpperPrice int    `json:"upper_price"`
+	BookName   string  `json:"book_name"`
+	Category   string  `json:"category"`
+	Press      string  `json:"press"`
+	LowerYear  int     `json:"lower_year"`
+	UpperYear  int     `json:"upper_year"`
+	Author     string  `json:"author"`
+	LowerPrice float32 `json:"lower_price"`
+	UpperPrice float32 `json:"upper_price"`
 }
 
 type QueryBookResp struct {
@@ -48,5 +48,9 @@ type AddBooksReq struct {
 }
 
 type AddBooksResp struct {
+	Done string `json:"done"`
+}
+
+type DeleteBookResp struct {
 	Done string `json:"done"`
 }
